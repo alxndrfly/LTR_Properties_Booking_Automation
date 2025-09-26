@@ -1,0 +1,1 @@
+LTR - Website takes in a UUID, fetches on airtable, shows properties and allows bookings.
