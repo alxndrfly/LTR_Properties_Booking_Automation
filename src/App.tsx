@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { JsonPayload, Property, LoadingState, StatusMessage } from './types';
+import { JsonPayload, Property, LoadingState } from './types';
 import { fetchJsonPayload, fetchPropertiesWithImages } from './services/airtable';
 import PropertyCard from './components/PropertyCard';
 import LoadingSpinner from './components/LoadingSpinner';

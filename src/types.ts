@@ -26,6 +26,7 @@ export interface Property {
   totalScore?: number;
   petFriendly?: boolean;
   Fotos?: string[];
+  images?: string[];
 }
 
 export interface InquiredProperty {
