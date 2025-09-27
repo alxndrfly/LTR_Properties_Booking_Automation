@@ -8,24 +8,24 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #f3f4f6;
+  background-color: #1a1a1a;
 }
 
 .carousel-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
 .carousel-placeholder {
   width: 100%;
   height: 100%;
-  background-color: #f3f4f6;
+  background-color: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af;
+  color: #cccccc;
   font-size: 0.9rem;
 }
 

@@ -74,7 +74,7 @@ exports.handler = async (event, context) => {
 
           if (property.Fotos && Array.isArray(property.Fotos)) {
             property.images = property.Fotos.map((foto) =>
-              typeof foto === 'string' ? foto : foto.url
+              typeof foto === 'string' ? foto : (foto.full || foto.url)
             );
           }
 
