@@ -1,7 +1,7 @@
 .app {
   min-height: 100vh;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #2c2c2c;
 }
 
 .app-header {
@@ -17,13 +17,11 @@
   text-align: center;
 }
 
-.logo {
-  font-size: 1.75rem;
-  font-weight: 300;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+.logo-banner {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: contain;
 }
 
 .app-main {
@@ -40,13 +38,13 @@
 .section-title {
   font-size: 1.5rem;
   font-weight: 300;
-  color: #ffffff;
+  color: #2c2c2c;
   margin-bottom: 0.75rem;
   letter-spacing: 0.025em;
 }
 
 .section-subtitle {
-  color: #cccccc;
+  color: #8a8a8a;
   font-size: 0.95rem;
   margin: 0;
   font-weight: 300;
@@ -82,8 +80,8 @@
     padding: 0 2rem;
   }
 
-  .logo {
-    font-size: 1.5rem;
+  .logo-banner {
+    max-height: 100px;
   }
 
   .section-title {

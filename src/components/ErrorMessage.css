@@ -12,7 +12,7 @@
 }
 
 .error-title {
-  color: #ffffff;
+  color: #2c2c2c;
   font-size: 1.3rem;
   font-weight: 300;
   margin-bottom: 1.5rem;
@@ -20,7 +20,7 @@
 }
 
 .error-message {
-  color: #cccccc;
+  color: #8a8a8a;
   font-size: 0.95rem;
   font-weight: 300;
   line-height: 1.6;

@@ -10,8 +10,8 @@
 .spinner {
   width: 32px;
   height: 32px;
-  border: 1px solid #333333;
-  border-top: 1px solid #ffffff;
+  border: 1px solid #e0e0e0;
+  border-top: 1px solid #2c2c2c;
   border-radius: 50%;
   animation: spin 1.5s linear infinite;
 }
@@ -22,7 +22,7 @@
 }
 
 .loading-text {
-  color: #cccccc;
+  color: #8a8a8a;
   font-size: 0.9rem;
   font-weight: 300;
   margin: 0;

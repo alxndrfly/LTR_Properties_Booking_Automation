@@ -81,7 +81,7 @@ const App: React.FC = () => {
       <div className="app">
         <header className="app-header">
           <div className="logo-container">
-            <h1 className="logo">LTR Properties</h1>
+            <img src="/logo_banner.png" alt="LTR Properties" className="logo-banner" />
           </div>
         </header>
         <main className="app-main">
@@ -96,7 +96,7 @@ const App: React.FC = () => {
       <div className="app">
         <header className="app-header">
           <div className="logo-container">
-            <h1 className="logo">LTR Properties</h1>
+            <img src="/logo_banner.png" alt="LTR Properties" className="logo-banner" />
           </div>
         </header>
         <main className="app-main">
@@ -111,7 +111,7 @@ const App: React.FC = () => {
       <div className="app">
         <header className="app-header">
           <div className="logo-container">
-            <h1 className="logo">LTR Properties</h1>
+            <img src="/logo_banner.png" alt="LTR Properties" className="logo-banner" />
           </div>
         </header>
         <main className="app-main">
@@ -128,7 +128,7 @@ const App: React.FC = () => {
     <div className="app">
       <header className="app-header">
         <div className="logo-container">
-          <h1 className="logo">LTR Properties</h1>
+          <img src="/logo_banner.png" alt="LTR Properties" className="logo-banner" />
         </div>
       </header>
 
