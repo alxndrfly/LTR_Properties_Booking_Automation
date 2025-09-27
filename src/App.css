@@ -1,78 +1,85 @@
 .app {
   min-height: 100vh;
-  background-color: #1a1a1a;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #2c2c2c;
 }
 
 .app-header {
-  background-color: #000000;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #333;
+  background-color: transparent;
+  padding: 3rem 0 2rem 0;
+  border-bottom: none;
 }
 
 .logo-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
   text-align: center;
 }
 
 .logo {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #2c2c2c;
   margin: 0;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .app-main {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 3rem 2rem;
+  padding: 2rem 3rem 4rem 3rem;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-  color: #999999;
-  font-size: 1.1rem;
-  margin: 0;
-}
-
-.requested-property-section {
   margin-bottom: 4rem;
 }
 
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #2c2c2c;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.025em;
+}
+
+.section-subtitle {
+  color: #8a8a8a;
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.requested-property-section {
+  margin-bottom: 6rem;
+}
+
 .requested-property-container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .recommended-properties-section {
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 }
 
 .properties-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 1000px;
+  gap: 3rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .app-main {
-    padding: 2rem 1rem;
+    padding: 2rem 2rem;
+  }
+
+  .logo-container {
+    padding: 0 2rem;
   }
 
   .logo {
@@ -80,33 +87,32 @@
   }
 
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .section-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .properties-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .section-header {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .requested-property-section {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
 }
 
 @media (max-width: 480px) {
   .app-main {
-    padding: 1.5rem 0.75rem;
+    padding: 1.5rem 1.5rem;
   }
 
   .logo-container {
-    padding: 0 1rem;
+    padding: 0 1.5rem;
   }
 }
