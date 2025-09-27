@@ -55,7 +55,7 @@
 }
 
 .requested-property-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -66,8 +66,8 @@
 .properties-grid {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  max-width: 900px;
+  gap: 0;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
