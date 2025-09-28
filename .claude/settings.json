@@ -40,6 +40,25 @@
         "Bash(git push origin main --force)",
         "Bash(git reset --hard)"
       ]
+    },
+  
+  
+
+  
+    "hooks" : {
+      "UserPromptSubmit": [
+        {
+          "hooks": [
+            {
+              "type": "command",
+              "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/answer_without_coding.py\""
+            },
+            {
+              "type": "command",
+              "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/UserPromptSubmit/append_ultrathink.py\""
+            }
+          ]
+        }
+      ]
     }
   }
-  

@@ -14,7 +14,13 @@
       "Bash(npm install)",
       "Bash(npm run dev:*)",
       "Bash(git rm:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(netlify dev:*)",
+      "Bash(npx netlify:*)",
+      "Bash(npm run:*)",
+      "Bash(ipconfig)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

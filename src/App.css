@@ -5,9 +5,10 @@
 }
 
 .app-header {
-  background-color: transparent;
-  padding: 3rem 0 2rem 0;
+  background-color: #000000;
+  padding: 0;
   border-bottom: none;
+  width: 100%;
 }
 
 .logo-container {
@@ -28,6 +29,9 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 2rem 3rem 4rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .section-header {
@@ -55,8 +59,11 @@
 }
 
 .requested-property-container {
-  max-width: 1000px;
+  max-width: 1294px;
   margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .recommended-properties-section {
@@ -67,8 +74,10 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-width: 1000px;
+  max-width: 1294px;
   margin: 0 auto;
+  width: 100%;
+  align-items: center;
 }
 
 @media (max-width: 768px) {

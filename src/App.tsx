@@ -62,7 +62,15 @@ const App: React.FC = () => {
 
       const recommendedProps = propertiesWithImages.filter(p =>
         payload.algo_top4_properties.some(algoProp => algoProp.id === p.id)
-      );
+      ).map(property => {
+        const algoProperty = payload.algo_top4_properties.find(algoProp => algoProp.id === property.id);
+        return {
+          ...property,
+          totalScore: algoProperty?.totalScore,
+          scores: algoProperty?.scores,
+          petFriendly: algoProperty?.petFriendly
+        };
+      });
       setRecommendedProperties(recommendedProps);
 
       setLoadingState({ isLoading: false, error: null });
