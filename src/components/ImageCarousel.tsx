@@ -38,10 +38,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
 
   const openFullscreen = () => {
     setIsFullscreenOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeFullscreen = () => {
     setIsFullscreenOpen(false);
+    document.body.style.overflow = 'unset';
   };
 
   const calculateDynamicHeight = () => {
@@ -53,8 +55,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
 
     if (!currentImageDimensions) {
       // Fallback to original calculation if dimensions not loaded yet
-      const widthBasedMax = containerWidth * 0.8;
-      const viewportBasedMax = window.innerHeight * 0.7;
+      const widthBasedMax = containerWidth * 0.9064;
+      const viewportBasedMax = window.innerHeight * 0.7931;
       const maxHeight = Math.min(widthBasedMax, viewportBasedMax);
       setContainerHeight(maxHeight);
       return;
@@ -64,8 +66,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
     const idealHeight = containerWidth / currentImageDimensions.aspectRatio;
 
     // Set maximum height constraints
-    const widthBasedMax = containerWidth * 0.8;
-    const viewportBasedMax = window.innerHeight * 0.7;
+    const widthBasedMax = containerWidth * 0.9064;
+    const viewportBasedMax = window.innerHeight * 0.7931;
     const maxHeight = Math.min(widthBasedMax, viewportBasedMax);
 
     // Use ideal height if it's within limits, otherwise use max height
@@ -117,6 +119,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [currentIndex, imageDimensions]);
+
+  // Cleanup body overflow on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   return (
     <div className="carousel" style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}>
@@ -189,43 +198,45 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
       {/* Fullscreen Modal */}
       {isFullscreenOpen && (
         <div className="fullscreen-modal" onClick={closeFullscreen}>
-          <div className="fullscreen-content" onClick={(e) => e.stopPropagation()}>
-            <button className="fullscreen-close" onClick={closeFullscreen}>
-              ✕
-            </button>
-            <img
-              src={images[currentIndex]}
-              alt={`${alt} - Image ${currentIndex + 1}`}
-              className="fullscreen-image"
-            />
-            {images.length > 1 && (
-              <>
-                <div
-                  className="fullscreen-nav fullscreen-nav-left"
-                  onClick={goToPrevious}
-                  aria-label="Previous image"
-                />
-                <div
-                  className="fullscreen-nav fullscreen-nav-right"
-                  onClick={goToNext}
-                  aria-label="Next image"
-                />
-                <button
-                  className="fullscreen-arrow fullscreen-arrow-left"
-                  onClick={goToPrevious}
-                  aria-label="Previous image"
-                >
-                  &#8249;
-                </button>
-                <button
-                  className="fullscreen-arrow fullscreen-arrow-right"
-                  onClick={goToNext}
-                  aria-label="Next image"
-                >
-                  &#8250;
-                </button>
-              </>
-            )}
+          <button className="fullscreen-close" onClick={closeFullscreen}>
+            ✕
+          </button>
+          <div className="fullscreen-content">
+            <div className="fullscreen-image-container" onClick={(e) => e.stopPropagation()}>
+              <img
+                src={images[currentIndex]}
+                alt={`${alt} - Image ${currentIndex + 1}`}
+                className="fullscreen-image"
+              />
+              {images.length > 1 && (
+                <>
+                  <div
+                    className="fullscreen-nav fullscreen-nav-left"
+                    onClick={goToPrevious}
+                    aria-label="Previous image"
+                  />
+                  <div
+                    className="fullscreen-nav fullscreen-nav-right"
+                    onClick={goToNext}
+                    aria-label="Next image"
+                  />
+                  <button
+                    className="fullscreen-arrow fullscreen-arrow-left"
+                    onClick={goToPrevious}
+                    aria-label="Previous image"
+                  >
+                    &#8249;
+                  </button>
+                  <button
+                    className="fullscreen-arrow fullscreen-arrow-right"
+                    onClick={goToNext}
+                    aria-label="Next image"
+                  >
+                    &#8250;
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

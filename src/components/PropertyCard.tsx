@@ -116,12 +116,17 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           {/* Left Column */}
           <div className="property-left-column">
             <div className="property-status">{getStatusText()}</div>
-            <div className="property-price">{formatPrice(property.Precio)}</div>
-            <div className="property-period">Per Month</div>
 
-            <div className="location-section">
-              <div className="located-in-label">Located in</div>
-              <div className="location-value">{getLocationString(property.Location)}</div>
+            <div className="price-location-row">
+              <div className="price-section">
+                <div className="property-price">{formatPrice(property.Precio)}</div>
+                <div className="property-period">Per Month</div>
+              </div>
+
+              <div className="location-section">
+                <div className="located-in-label">Located in</div>
+                <div className="location-value">{getLocationString(property.Location)}</div>
+              </div>
             </div>
 
             <div className="property-specs">
