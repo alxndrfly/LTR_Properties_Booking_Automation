@@ -4,6 +4,7 @@
   publish = "dist"
 
 [dev]
-  command = "npm run dev"
+  command = "npm run dev:vite"
   functionsPort = 8888
-  port = 5173
+  port = 8888
+  targetPort = 5173

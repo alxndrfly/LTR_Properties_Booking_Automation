@@ -4,6 +4,12 @@ import './ImageCarousel.css';
 interface ImageCarouselProps {
   images: string[];
   alt: string;
+  hideControls?: boolean;
+  firstImageDimensions?: {
+    width: number;
+    height: number;
+    aspectRatio: number;
+  };
 }
 
 interface ImageDimensions {
@@ -12,11 +18,12 @@ interface ImageDimensions {
   aspectRatio: number;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt, hideControls = false, firstImageDimensions }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [imageDimensions, setImageDimensions] = useState<Map<string, ImageDimensions>>(new Map());
   const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,10 +36,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
   }
 
   const goToPrevious = () => {
+    setImageLoaded(false);
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
   const goToNext = () => {
+    setImageLoaded(false);
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
@@ -51,7 +60,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
 
     const containerWidth = containerRef.current.offsetWidth;
     const currentImageSrc = images[currentIndex];
-    const currentImageDimensions = imageDimensions.get(currentImageSrc);
+    let currentImageDimensions = imageDimensions.get(currentImageSrc);
+
+    // Use firstImageDimensions for the first image if available
+    if (currentIndex === 0 && !currentImageDimensions && firstImageDimensions) {
+      currentImageDimensions = firstImageDimensions;
+    }
 
     if (!currentImageDimensions) {
       // Fallback to original calculation if dimensions not loaded yet
@@ -127,6 +141,26 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
     };
   }, []);
 
+  const handleImageLoad = () => {
+    // Recalculate height when image actually loads
+    calculateDynamicHeight();
+    // Show the image now that it's loaded and sized correctly
+    setImageLoaded(true);
+  };
+
+  // Reset loaded state when current image changes (but not on initial mount)
+  useEffect(() => {
+    // Check if image is already cached/loaded
+    if (imgRef.current?.complete && imgRef.current?.naturalHeight !== 0) {
+      // Image is already loaded (cached or preloaded)
+      calculateDynamicHeight();
+      setImageLoaded(true);
+    } else {
+      // Image not loaded yet, hide it
+      setImageLoaded(false);
+    }
+  }, [currentIndex]);
+
   return (
     <div className="carousel" style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}>
       <div className="carousel-container" ref={containerRef} style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}>
@@ -135,8 +169,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
           src={images[currentIndex]}
           alt={`${alt} - Image ${currentIndex + 1}`}
           className="carousel-image"
+          style={{ opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.2s ease-in-out' }}
+          onLoad={handleImageLoad}
         />
-        {images.length > 1 && (
+        {!hideControls && images.length > 1 && (
           <>
             {/* Full left side click area */}
             <div
@@ -174,7 +210,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
           </>
         )}
         {/* Single image center click for fullscreen */}
-        {images.length === 1 && (
+        {!hideControls && images.length === 1 && (
           <div
             className="carousel-click-area carousel-click-area-center"
             onClick={openFullscreen}
@@ -182,7 +218,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, alt }) => {
           />
         )}
       </div>
-      {images.length > 1 && (
+      {!hideControls && images.length > 1 && (
         <div className="carousel-indicators">
           {images.map((_, index) => (
             <button

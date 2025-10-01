@@ -5,7 +5,7 @@ const LoadingSpinner: React.FC = () => {
   return (
     <div className="loading-container">
       <div className="spinner"></div>
-      <p className="loading-text">Loading...</p>
+      <p className="loading-text">Please wait while we load the properties</p>
     </div>
   );
 };

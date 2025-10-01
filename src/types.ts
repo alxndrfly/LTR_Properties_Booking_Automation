@@ -27,18 +27,20 @@ export interface Property {
   petFriendly?: boolean;
   Fotos?: string[];
   images?: string[];
-}
-
-export interface InquiredProperty {
-  id: string;
-  name: string;
+  firstImageDimensions?: {
+    width: number;
+    height: number;
+    aspectRatio: number;
+  };
 }
 
 export interface JsonPayload {
   property_inquired_message: string;
-  property_inquired: InquiredProperty;
+  property_inquired: Property;
   algo_message: string;
-  algo_top4_properties: Property[];
+  algo_top_properties: Property[];
+  ranked_properties: Property[];
+  first_name?: string;
 }
 
 export interface AirtableRecord {
@@ -53,7 +55,9 @@ export interface PropertyWithImages extends Property {
   images?: string[];
 }
 
-export type StatusMessage = "ok" | "no_pets_requirement" | "not_available" | "duration_mismatch" | "no_pets_allowed";
+export type StatusMessage = "ok" | "no_pets_requirement" | "not_available" | "duration_mismatch" | "duration_mismatch_seasonal" | "duration_mismatch_annual" | "no_pets_allowed";
+
+export type AlgoMessage = "general_recs" | "pets_list_populated" | "pets_list_partial" | "pets_list_empty";
 
 export interface LoadingState {
   isLoading: boolean;

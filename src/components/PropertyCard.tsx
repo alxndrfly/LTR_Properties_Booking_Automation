@@ -8,13 +8,17 @@ interface PropertyCardProps {
   isGrayedOut?: boolean;
   statusMessage?: string;
   showBookButton?: boolean;
+  isPetFriendlyContext?: boolean;
+  isRequestedProperty?: boolean;
 }
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
   property,
   isGrayedOut = false,
   statusMessage,
-  showBookButton = true
+  showBookButton = true,
+  isPetFriendlyContext = false,
+  isRequestedProperty = false
 }) => {
   const formatPrice = (price: string) => {
     return `€${price}`;
@@ -31,11 +35,43 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     return '95% Match';
   };
 
-  const getFeatures = (): string[] => {
+  const getFeatures = (): { text: string; isBold: boolean }[] => {
+    let features: string[] = [];
     if (property["Property Features"]) {
-      return property["Property Features"];
+      features = property["Property Features"];
+    } else {
+      features = ['Pool', 'Air conditioning', 'Pets allowed', 'Free cancellation'];
     }
-    return ['Pool', 'Air conditioning', 'Pets allowed', 'Free cancellation'];
+
+    const isPetContext = isPetFriendlyContext || property.petFriendly;
+
+    if (!isPetContext) {
+      return features.map(feature => ({ text: feature, isBold: false }));
+    }
+
+    // Find pet-related features
+    const petFeatures: string[] = [];
+    const otherFeatures: string[] = [];
+
+    features.forEach(feature => {
+      const featureLower = feature.toLowerCase();
+      if (featureLower.includes('pet') || featureLower.includes('animal')) {
+        petFeatures.push(feature);
+      } else {
+        otherFeatures.push(feature);
+      }
+    });
+
+    // If no pet features found but pets are involved, add "Animals allowed"
+    if (petFeatures.length === 0 && isPetContext) {
+      petFeatures.push('Animals allowed');
+    }
+
+    // Combine with pet features first (bold) and others after (normal)
+    return [
+      ...petFeatures.map(feature => ({ text: feature, isBold: true })),
+      ...otherFeatures.map(feature => ({ text: feature, isBold: false }))
+    ];
   };
 
   const getStatusText = (): string => {
@@ -97,10 +133,18 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             <h3 className="property-title">{property.Nombre}</h3>
             <div className="title-underline"></div>
           </div>
-          <div className="match-score-section">
-            <div className="match-percentage">{getMatchPercentage()}</div>
-            <div className="score-underline"></div>
-          </div>
+          {!isRequestedProperty && (
+            <div className="match-score-section">
+              <div className="match-percentage">{getMatchPercentage()}</div>
+              <div className="score-underline"></div>
+            </div>
+          )}
+          {isRequestedProperty && isGrayedOut && (
+            <div className="match-score-section">
+              <div className="match-percentage">Mismatch</div>
+              <div className="score-underline"></div>
+            </div>
+          )}
         </div>
 
         {/* Image Carousel Section */}
@@ -108,11 +152,19 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           <ImageCarousel
             images={property.images || []}
             alt={property.Nombre}
+            hideControls={isGrayedOut}
+            firstImageDimensions={property.firstImageDimensions}
           />
+          {isGrayedOut && statusMessage && (
+            <div className="unavailable-overlay">
+              <div className="unavailable-message">{statusMessage}</div>
+            </div>
+          )}
         </div>
 
         {/* Three Column Bottom Section */}
-        <div className="property-content">
+        {!isGrayedOut && (
+          <div className="property-content">
           {/* Left Column */}
           <div className="property-left-column">
             <div className="property-status">{getStatusText()}</div>
@@ -175,7 +227,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
               {getFeatures().map((feature, index) => (
                 <div key={index} className="feature-item">
                   <span className="feature-checkmark">✓</span>
-                  <span className="feature-text">{feature}</span>
+                  <span className={`feature-text ${feature.isBold ? 'feature-text-bold' : ''}`}>
+                    {feature.text}
+                  </span>
                 </div>
               ))}
             </div>
@@ -191,9 +245,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             </div>
           </div>
         </div>
+        )}
 
         {/* Centered Book Viewing Button */}
-        {showBookButton && (
+        {showBookButton && !isGrayedOut && (
           <div className="book-viewing-container">
             <button
               className="book-viewing-button"
@@ -205,7 +260,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
           </div>
         )}
 
-        {statusMessage && (
+        {statusMessage && !isGrayedOut && (
           <div className={`status-message ${isGrayedOut ? 'error' : 'success'}`}>
             {statusMessage}
           </div>

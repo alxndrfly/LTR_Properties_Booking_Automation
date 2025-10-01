@@ -1,29 +1,24 @@
-import { JsonPayload, Property } from '../types';
+import { JsonPayload } from '../types';
 
-export async function fetchJsonPayload(uuid: string): Promise<JsonPayload> {
-  const response = await fetch(`/.netlify/functions/fetch-json-payload?uuid=${uuid}`);
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-    throw new Error(errorData.error || `Failed to fetch JSON payload: ${response.statusText}`);
-  }
-
-  return await response.json();
-}
-
-export async function fetchPropertiesWithImages(propertyIds: string[]): Promise<Property[]> {
-  const response = await fetch('/.netlify/functions/fetch-properties', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ propertyIds }),
-  });
+/**
+ * Fetches complete recommendation data from n8n webhook via Netlify Function
+ * This function returns all data in a single call including property details and images
+ */
+export async function fetchRecommendations(uuid: string): Promise<JsonPayload> {
+  // Call the Netlify Function which proxies to n8n webhook
+  const response = await fetch(`/.netlify/functions/get-recommendations?uuid=${encodeURIComponent(uuid)}`);
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-    throw new Error(errorData.error || `Failed to fetch properties: ${response.statusText}`);
+    throw new Error(errorData.error || `Failed to fetch recommendations: ${response.statusText}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+
+  // Validate that we have the required structure
+  if (!data.property_inquired || !data.algo_top_properties) {
+    throw new Error('Invalid data structure received from server');
+  }
+
+  return data;
 }
