@@ -51,12 +51,6 @@ const App: React.FC = () => {
     return message;
   };
 
-  const getPropertyCardMessage = (statusCode: string): string => {
-    if (statusCode === 'not_available') {
-      return 'This property is no longer available';
-    }
-    return 'This property does not match your request';
-  };
 
   const isPropertyAccepted = (statusCode: string): boolean => {
     return statusCode === 'ok' || statusCode === 'no_pets_requirement';
@@ -85,11 +79,12 @@ const App: React.FC = () => {
       });
 
       // Store first image dimensions for initial height calculation
-      if (property.Fotos.length > 0 && property.Fotos[0].width && property.Fotos[0].height) {
+      const firstFoto = property.Fotos[0];
+      if (property.Fotos.length > 0 && typeof firstFoto !== 'string' && firstFoto.width && firstFoto.height) {
         property.firstImageDimensions = {
-          width: property.Fotos[0].width,
-          height: property.Fotos[0].height,
-          aspectRatio: property.Fotos[0].width / property.Fotos[0].height
+          width: firstFoto.width,
+          height: firstFoto.height,
+          aspectRatio: firstFoto.width / firstFoto.height
         };
       }
     }
@@ -108,7 +103,7 @@ const App: React.FC = () => {
 
     // Preload all first images
     const imagePromises = imagesToPreload.map(src => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(src);
         img.onerror = () => resolve(src); // Resolve anyway to not block
