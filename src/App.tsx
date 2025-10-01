@@ -231,22 +231,35 @@ const App: React.FC = () => {
             statusMessage={statusMessage}
           />
 
+          <div className="signature-message">
+            The Long Term Rental Team
+          </div>
+
           {requestedProperty && isAccepted && (
             <div className="requested-property-container">
               <PropertyCard
                 property={requestedProperty}
                 isGrayedOut={false}
-                showBookButton={false}
+                showBookButton={true}
                 isPetFriendlyContext={isPetFriendlyContext}
                 isRequestedProperty={true}
               />
             </div>
           )}
-
-          <div className="signature-message">
-            The Long Term Rental Team
-          </div>
         </section>
+
+        {isAccepted && showRecommendations && (
+          <div className="recommendations-divider">
+            <div className="recommendations-bubble">
+              <p className="recommendations-divider-text">Your handpicked recommendations</p>
+            </div>
+            <div className="scroll-indicator">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 10L12 15L17 10" stroke="#1f2937" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        )}
 
         {showRecommendations && (
           <section className="recommended-properties-section">
