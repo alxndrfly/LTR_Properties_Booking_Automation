@@ -79,13 +79,15 @@ const App: React.FC = () => {
       });
 
       // Store first image dimensions for initial height calculation
-      const firstFoto = property.Fotos[0];
-      if (property.Fotos.length > 0 && typeof firstFoto !== 'string' && firstFoto.width && firstFoto.height) {
-        property.firstImageDimensions = {
-          width: firstFoto.width,
-          height: firstFoto.height,
-          aspectRatio: firstFoto.width / firstFoto.height
-        };
+      if (property.Fotos.length > 0) {
+        const firstFoto: any = property.Fotos[0];
+        if (typeof firstFoto !== 'string' && firstFoto.width && firstFoto.height) {
+          property.firstImageDimensions = {
+            width: firstFoto.width,
+            height: firstFoto.height,
+            aspectRatio: firstFoto.width / firstFoto.height
+          };
+        }
       }
     }
     return property;
