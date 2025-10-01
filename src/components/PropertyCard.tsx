@@ -25,7 +25,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   };
 
   const getLocationString = (locations: string[]) => {
-    return locations.join(', ');
+    return locations ? locations.join(', ') : 'Location not specified';
   };
 
   const getMatchPercentage = () => {
