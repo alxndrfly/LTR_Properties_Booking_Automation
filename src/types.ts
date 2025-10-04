@@ -63,3 +63,27 @@ export interface LoadingState {
   isLoading: boolean;
   error: string | null;
 }
+
+export interface FormData {
+  form_id: string;
+  linked_inquiry_id: string;
+  in_ibiza?: string;
+  availability_start?: string;
+  rental_duration?: string;
+  style?: string;
+  locations?: string;
+  occupants?: string;
+  bedrooms?: string;
+  profession?: string;
+  pets?: string;
+  budget?: string;
+  advance_payment?: string;
+}
+
+export interface FormSelectionPayload {
+  client_name: string;
+  client_id: string;
+  current_inquiry_id: string;
+  inquired_property_name: string;
+  forms: FormData[];
+}

@@ -20,7 +20,10 @@
       "Bash(npx netlify:*)",
       "Bash(npm run:*)",
       "Bash(ipconfig)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

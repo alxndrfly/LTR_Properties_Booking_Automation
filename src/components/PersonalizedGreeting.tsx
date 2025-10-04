@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './PersonalizedGreeting.css';
 
 interface PersonalizedGreetingProps {
   firstName?: string;
-  statusMessage: string;
+  statusMessage: string | ReactNode;
 }
 
 const PersonalizedGreeting: React.FC<PersonalizedGreetingProps> = ({
