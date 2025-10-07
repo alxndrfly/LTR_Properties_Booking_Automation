@@ -13,7 +13,6 @@ const FormSelection: React.FC = () => {
     error: null
   });
   const [formPayload, setFormPayload] = useState<FormSelectionPayload | null>(null);
-  const [showSuccessOverlay, setShowSuccessOverlay] = useState(false);
 
   const getUuidFromUrl = (): string | null => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -128,8 +127,9 @@ const FormSelection: React.FC = () => {
         throw new Error('Failed to submit inquiry selection');
       }
 
-      // Show success overlay
-      setShowSuccessOverlay(true);
+      // Redirect to success page
+      const redirectUrl = `/inquiry_merge?client_name=${encodeURIComponent(formPayload.client_name)}&property_name=${encodeURIComponent(formPayload.inquired_property_name)}`;
+      window.location.href = redirectUrl;
     } catch (error) {
       console.error('Error selecting inquiry:', error);
       // Optionally show error message to user
@@ -180,23 +180,6 @@ const FormSelection: React.FC = () => {
           </div>
         </section>
       </main>
-
-      {showSuccessOverlay && (
-        <div className="success-overlay">
-          <div className="success-modal">
-            <div className="success-content">
-              <h2 className="success-title">Thank you {formPayload.client_name}</h2>
-              <p className="success-message">
-                The property <strong>{formPayload.inquired_property_name}</strong> has been matched with this request.
-              </p>
-              <p className="success-message">
-                Expect an email from us in the next minutes.
-              </p>
-              <p className="success-signature">The Long Term Rental Team</p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
