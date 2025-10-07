@@ -103,7 +103,7 @@ const FormSelection: React.FC = () => {
   };
 
   const handleCreateNewInquiry = () => {
-    const tallyUrl = `https://tally.so/r/mY2e7B?inquiry_id=${formPayload.current_inquiry_id}`;
+    const tallyUrl = `https://tally.so/r/mY2e7B?inquiry_id=${formPayload.current_inquiry_id}&client_name=${formPayload.client_name}`;
     window.location.href = tallyUrl;
   };
 

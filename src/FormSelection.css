@@ -91,18 +91,24 @@
 
 .forms-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
   gap: 2rem;
   max-width: 1294px;
   margin: 0 auto;
   width: 100%;
-  justify-items: center;
   margin-top: 20px;
   padding: 0 2rem;
 }
 
-.forms-grid:has(:only-child) {
-  grid-template-columns: 1fr;
+@media (min-width: 769px) {
+  .forms-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.forms-grid:has(> :only-child) {
+  grid-template-columns: 1fr !important;
   place-items: center;
 }
 
