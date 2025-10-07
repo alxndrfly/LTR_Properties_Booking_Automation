@@ -248,7 +248,7 @@ const App: React.FC = () => {
           )}
         </section>
 
-        {isAccepted && showRecommendations && (
+        {showRecommendations && (
           <div className="recommendations-divider">
             <div className="recommendations-bubble">
               <p className="recommendations-divider-text">Your handpicked recommendations</p>
