@@ -1,0 +1,133 @@
+.booking-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-page-header {
+  background-color: #000000;
+  padding: 0;
+  border-bottom: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.booking-page-header .logo-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.25rem 3rem 0 3rem;
+  text-align: center;
+  flex: 1;
+}
+
+.booking-page-header .logo-banner {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.back-button {
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+
+.booking-page-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 16px;
+  color: #6b7280;
+  padding: 40px;
+}
+
+.back-link-container {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.back-link-button {
+  padding: 12px 24px;
+  background-color: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.back-link-button:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.back-link-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .booking-page-header {
+    position: relative;
+  }
+
+  .booking-page-header .logo-container {
+    padding: 0.2rem 2rem 0 2rem;
+  }
+
+  .booking-page-header .logo-banner {
+    max-height: 100px;
+  }
+
+  .back-button {
+    right: 2rem;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-page-header .logo-container {
+    padding: 0.15rem 1.5rem 0 1.5rem;
+  }
+
+  .back-button {
+    right: 1.5rem;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

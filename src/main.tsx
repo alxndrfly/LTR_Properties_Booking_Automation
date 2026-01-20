@@ -4,6 +4,7 @@ import App from './App.tsx'
 import FormSelection from './FormSelection.tsx'
 import FormRedirect from './FormRedirect.tsx'
 import InquiryMerge from './InquiryMerge.tsx'
+import BookingPage from './BookingPage.tsx'
 import './index.css'
 
 // Simple routing logic based on URL path
@@ -15,6 +16,8 @@ if (currentPath === '/form') {
   AppComponent = FormRedirect;
 } else if (currentPath === '/inquiry_merge') {
   AppComponent = InquiryMerge;
+} else if (currentPath === '/booking') {
+  AppComponent = BookingPage;
 } else {
   AppComponent = App;
 }

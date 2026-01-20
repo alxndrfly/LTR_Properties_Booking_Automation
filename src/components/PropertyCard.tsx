@@ -62,11 +62,6 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       }
     });
 
-    // If no pet features found but pets are involved, add "Animals allowed"
-    if (petFeatures.length === 0 && isPetContext) {
-      petFeatures.push('Animals allowed');
-    }
-
     // Combine with pet features first (bold) and others after (normal)
     return [
       ...petFeatures.map(feature => ({ text: feature, isBold: true })),
@@ -122,6 +117,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         ))}
       </>
     );
+  };
+
+  const handleBookViewing = () => {
+    const propertyName = encodeURIComponent(property.Nombre);
+    const location = encodeURIComponent(getLocationString(property.Location));
+    window.location.href = `/booking?property=${propertyName}&location=${location}`;
   };
 
   return (
@@ -253,7 +254,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             <button
               className="book-viewing-button"
               disabled={isGrayedOut}
-              onClick={() => console.log(`Book visit for ${property.Nombre}`)}
+              onClick={handleBookViewing}
             >
               BOOK VIEWING
             </button>
